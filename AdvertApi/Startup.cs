@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AdvertApi.HealthChecks;
 using AdvertApi.Services;
 using Amazon.Auth.AccessControlPolicy.ActionIdentifiers;
 using AutoMapper;
@@ -30,6 +31,19 @@ namespace AdvertApi
             services.AddAutoMapper(); // 17
             services.AddTransient<IAdvertStorageService, DynamoDBAdvertStorage>();
             services.AddControllers();
+
+            services.AddTransient<StorageHealthCheck>();
+
+           // services.AddHealthChecks(checks =>
+           //{
+           //    checks.AddCheck<StorageHealthCheck>("Storage", new System.TimeSpan(0, 1, 0));
+           //}
+           //     ); //20
+
+           services.AddHealthChecks().AddCheck<StorageHealthCheck>("Storage");
+          //  services.AddHealthChecks()
+          //.AddCheck<StorageHealthCheck>("api");
+            //services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +57,7 @@ namespace AdvertApi
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseHealthChecks("/health");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

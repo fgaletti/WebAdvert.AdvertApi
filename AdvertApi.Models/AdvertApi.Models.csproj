@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Francisco G.</Authors>
+    <Company>None</Company>
+    <Product>Web.Advert.Microservices</Product>
+    <PackageProjectUrl>https://github.com/fgaletti/WebAdvert.AdvertApi</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fgaletti/WebAdvert.AdvertApi</RepositoryUrl>
+    <PackageId>AdvertApi.Models.Fg</PackageId>
   </PropertyGroup>
 
 </Project>
