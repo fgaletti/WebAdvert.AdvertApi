@@ -1,4 +1,4 @@
-﻿using AdvertApi.Models;
+﻿using AdvertApi.Models.Fg;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using AutoMapper;
@@ -21,7 +21,7 @@ namespace AdvertApi.Services
         {
             // optimistic just for the example
             var dbMoled = _mapper.Map<AdvertDbModel>(model);
-            dbMoled.Id = new Guid().ToString();
+            dbMoled.Id = Guid.NewGuid().ToString(); //new Guid().ToString();
             dbMoled.CreationDateTime = DateTime.UtcNow;
             dbMoled.Status = AdvertStatus.Pending;
 

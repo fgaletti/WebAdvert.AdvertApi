@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AdvertApi.Models;
-using AdvertApi.Models.Messages;
+using AdvertApi.Models.Fg;
+using AdvertApi.Models.Fg.Messages;
 using AdvertApi.Services;
 using Amazon.DynamoDBv2;
 using Amazon.SimpleNotificationService;
@@ -83,21 +83,30 @@ namespace AdvertApi.Controllers
         //30
         private async Task RaiseAdvertConfirmedMessage(ConfirmAdvertModel model)
         {
-            var topicArn = Configuration.GetValue<string>("TopicArn");
-            var dbModel = await _advertStorageService.GetById(model.Id);
-
-            using (var client = new AmazonSimpleNotificationServiceClient())
+            try
             {
-                var message = new AdvertConfirmedMessage
-                {
-                    Id = model.Id,
-                    Title = dbModel.Title
-                };
-                var messageJson = JsonConvert.SerializeObject(message);
+                var topicArn = Configuration.GetValue<string>("TopicArn"); //advertapi-domain
+                var dbModel = await _advertStorageService.GetById(model.Id);
 
-                // publish to SNS
-                await client.PublishAsync(topicArn, messageJson); 
+                using (var client = new AmazonSimpleNotificationServiceClient())
+                {
+                    var message = new AdvertConfirmedMessage
+                    {
+                        Id = model.Id,
+                        Title = dbModel.Title
+                    };
+                    var messageJson = JsonConvert.SerializeObject(message);
+
+                    // publish to SNS
+                    await client.PublishAsync(topicArn, messageJson);
+                }
             }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e); // we need add loggin
+            }
+           
 
         }
     }

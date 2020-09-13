@@ -1,4 +1,4 @@
-﻿using AdvertApi.Models;
+﻿using AdvertApi.Models.Fg;
 using System;
 using System.Collections.Generic;
 using System.Linq;

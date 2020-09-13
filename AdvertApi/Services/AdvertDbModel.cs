@@ -1,4 +1,5 @@
 ﻿using AdvertApi.Models;
+using AdvertApi.Models.Fg;
 using Amazon.DynamoDBv2.DataModel;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace AdvertApi.Services
 {
     //17
-    [DynamoDBTable("Advert")]
+    [DynamoDBTable("Adverts")]
     public class AdvertDbModel
     {
         [DynamoDBHashKey]

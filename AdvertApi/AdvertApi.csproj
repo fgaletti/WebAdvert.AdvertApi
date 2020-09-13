@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AdvertApi.Models\AdvertApi.Models.csproj" />
+    <ProjectReference Include="..\AdvertApi.Models.Fg\AdvertApi.Models.Fg.csproj" />
   </ItemGroup>
 
 </Project>
